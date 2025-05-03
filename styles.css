@@ -1,0 +1,21 @@
+/* Mobile Menu Styles */
+#mobileMenuButton {
+    transition: transform 0.3s ease;
+}
+
+#mobileMenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    top: 100%;
+}
+
+#mobileMenu.open {
+    max-height: 500px;
+}
+
+@media (min-width: 768px) {
+    #mobileMenuButton {
+        display: none;
+    }
+}

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEADRUSH - Your Favorite Vending Machine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@700;800;900&display=swap');
+        
+        :root {
+            --pink: #EC008C;
+            --yellow: #F6EB08;
+            --gradient: linear-gradient(-45deg, var(--pink), var(--yellow));
+        }
+        
+        body {
+            font-family: 'Red Hat Display', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .gradient-bg {
+            background: var(--gradient);
+        }
+        
+        .gradient-border {
+            position: relative;
+        }
+        
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            padding: 2px;
+            background: var(--gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .tilt-element {
+            transform: rotate(-2deg);
+        }
+        
+        .hover-tilt:hover {
+            transform: rotate(2deg) scale(1.02);
+            transition: all 0.3s ease;
+        }
+        
+        .machine-shadow {
+            box-shadow: 0 20px 50px rgba(236, 0, 140, 0.2);
+        }
+
+        .box-shadow {
+            filter: drop-shadow(0 20px 50px rgba(236, 0, 140, 0.2));
+            width: fit-content;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <image href="#" class="h-10" src="/images/Head-Rush-Logo-PNG.png"></image>
+                    <!-- <span class="text-3xl font-black gradient-text">HEADRUSH</span> -->
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#products" class="font-bold uppercase hover:text-pink-600 transition">Products</a>
+                        <a href="#franchise" class="font-bold uppercase hover:text-pink-600 transition">Franchise</a>
+                        <a href="#whitelabel" class="font-bold uppercase hover:text-pink-600 transition">White Label</a>
+                        <a href="#app" class="font-bold uppercase hover:text-pink-600 transition">App</a>
+                        <a href="#locations" class="font-bold uppercase hover:text-pink-600 transition">Locations</a>
+                        <button class="gradient-border px-6 py-2 rounded-full font-bold uppercase hover-tilt">
+                            <span class="gradient-text">Contact</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-900">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="slide-in">
+                    <h1 class="text-5xl md:text-7xl font-black uppercase mb-6">
+                        <span class="gradient-text">Your Favorite</span><br>
+                        <span class="text-gray-900">Vending Machine.</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-gray-700">
+                        Disrupt retail with sleek, automated vape vending machines—zero hassle, maximum profits.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="gradient-bg text-white px-8 py-4 rounded-full font-bold uppercase hover-tilt pulse-animation">
+                            Start Now
+                        </button>
+                        <button class="gradient-border px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                            <span class="gradient-text">Join the Revolution</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <!-- <div class="gradient-bg w-full h-96 rounded-3xl tilt-element machine-shadow"></div> -->
+                    <img src="images/GRADIENT-MACHINE.png" 
+                         alt="HEADRUSH Vending Machine" 
+                         class="box-shadow hover-tilt transition-all">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section id="products" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black uppercase mb-4">
+                    <span class="gradient-text">Boring?</span>
+                    <span class="text-gray-900">No Thanks.</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Our machines combine cutting-edge technology with irresistible design.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl hover-tilt">
+                    <div class="gradient-bg w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-bolt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase mb-4">Sleek Design</h3>
+                    <p class="text-gray-700">
+                        Rounded, modern vending units that attract customers and enhance any space.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl hover-tilt">
+                    <div class="gradient-bg w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase mb-4">Automated Efficiency</h3>
+                    <p class="text-gray-700">
+                        Real-time inventory tracking and user-friendly operation for maximum uptime.
+                    </p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-3xl hover-tilt">
+                    <div class="gradient-bg w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-black uppercase mb-4">Profit Maximized</h3>
+                    <p class="text-gray-700">
+                        Data-driven placement and pricing strategies to boost your bottom line.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-3xl font-black uppercase mb-6 gradient-text">How It Works</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">1</div>
+                            <div>
+                                <h4 class="text-2xl font-bold uppercase mb-4">Place Your Machine</h4>
+                                <p class="text-gray-700">Strategic locations with high foot traffic for maximum visibility.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">2</div>
+                            <div>
+                                <h4 class="text-2xl font-bold uppercase mb-4">Stock & Monitor</h4>
+                                <p class="text-gray-700">Our app tracks inventory and sales in real-time.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">3</div>
+                            <div>
+                                <h4 class="text-2xl font-bold uppercase mb-4">Profit</h4>
+                                <p class="text-gray-700">Watch your passive income grow with minimal effort.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 relative">
+                    <!-- <div class="gradient-bg w-full h-80 rounded-3xl tilt-element machine-shadow"></div> -->
+                    <img src="images/Headrush-Cartoon.png" 
+                         alt="HEADRUSH Vending Machine Interface" 
+                         class="h-full w-full box-shadow hover-tilt">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Franchise Section -->
+    <section id="franchise" class="py-20 px-4 sm:px-6 lg:px-8 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-black uppercase mb-6">
+                        <span class="text-white">Own It.</span><br>
+                        <span class="text-black">Profit From It.</span>
+                    </h2>
+                    <p class="text-xl mb-8">
+                        Low-cost entry, built-in business model, real profits, zero stress—your own fleet of HEADRUSH vending machines.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-black text-white px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                            Franchise Details
+                        </button>
+                        <button class="bg-white text-black px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                            Calculate Earnings
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-3xl p-8 text-gray-900 hover-tilt">
+                    <h3 class="text-2xl font-black uppercase mb-6 gradient-text">Why Franchise?</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                            <span>Turnkey business model with proven success</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                            <span>Comprehensive training and ongoing support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                            <span>Exclusive territory rights</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                            <span>Marketing and brand recognition</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 text-xl mr-3 mt-1"></i>
+                            <span>Automated operations with our tracking app</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- White Label Section -->
+    <section id="whitelabel" class="py-20 px-4 sm:px-6 lg:px-8 bg-black text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-4xl md:text-5xl font-black uppercase mb-6">
+                        <span class="gradient-text">Customize It.</span><br>
+                        <span class="text-white">Make It Yours.</span>
+                    </h2>
+                    <p class="text-xl mb-8">
+                        Fully customizable branding for businesses wanting to integrate vending solutions without losing identity.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <button class="gradient-bg text-white px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                            White Label Options
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                            Request Samples
+                        </button>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 relative">
+                    <div class="gradient-bg w-full h-80 rounded-3xl tilt-element"></div>
+                    <div class="absolute top-0 w-full h-full flex items-center justify-center">
+                        <div class="bg-white text-black p-8 rounded-2xl w-3/4">
+                            <h3 class="text-2xl font-black uppercase mb-4 gradient-text">Your Brand Here</h3>
+                            <p class="text-gray-700">Custom colors, logos, and messaging to match your existing brand identity.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Section -->
+    <!-- <section id="app" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black uppercase mb-4">
+                    <span class="text-gray-900">Know Everything,</span>
+                    <span class="gradient-text">Anytime.</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Our powerful app puts control in your pocket—track sales, manage inventory, optimize placement.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <div class="gradient-bg w-full h-96 rounded-3xl tilt-element"></div>
+                    <img src="images/" 
+                         alt="HEADRUSH App Interface" 
+                         class="absolute top-0 w-full h-full object-cover rounded-3xl tilt-element">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-black uppercase mb-6 gradient-text">Sales & Tracking App</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold uppercase mb-2">Real-Time Analytics</h4>
+                                <p class="text-gray-700">Monitor sales performance and inventory levels from anywhere.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold uppercase mb-2">Automated Alerts</h4>
+                                <p class="text-gray-700">Get notified when stock is low or maintenance is needed.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="gradient-bg text-white font-bold rounded-full w-8 h-8 flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold uppercase mb-2">Location Optimization</h4>
+                                <p class="text-gray-700">Data-driven insights to maximize foot traffic and sales.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex space-x-4">
+                        <button class="flex items-center bg-black text-white px-6 py-3 rounded-lg hover-tilt">
+                            <i class="fab fa-apple text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Download on the</div>
+                                <div class="font-bold">App Store</div>
+                            </div>
+                        </button>
+                        <button class="flex items-center bg-black text-white px-6 py-3 rounded-lg hover-tilt">
+                            <i class="fab fa-google-play text-2xl mr-2"></i>
+                            <div class="text-left">
+                                <div class="text-xs">Get it on</div>
+                                <div class="font-bold">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Locations Section -->
+    <section id="locations" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black uppercase mb-4">
+                    <span class="gradient-text">Right Place,</span>
+                    <span class="text-gray-900">Right Profits.</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Our strategic placement ensures maximum visibility and revenue for your machines.
+                </p>
+            </div>
+            
+            <div class="bg-gray-100 rounded-3xl p-8 mb-12">
+                <div class="h-96 bg-gray-300 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-map-marked-alt text-5xl text-gray-500"></i>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-lg hover-tilt">
+                    <h3 class="text-xl font-black uppercase mb-4 gradient-text">High-Traffic Zones</h3>
+                    <p class="text-gray-700">
+                        Shopping malls, convenience stores, and entertainment venues with proven customer flow.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg hover-tilt">
+                    <h3 class="text-xl font-black uppercase mb-4 gradient-text">24/7 Accessibility</h3>
+                    <p class="text-gray-700">
+                        Locations that remain open around the clock to capture all potential sales.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-lg hover-tilt">
+                    <h3 class="text-xl font-black uppercase mb-4 gradient-text">Exclusive Territories</h3>
+                    <p class="text-gray-700">
+                        Protected areas ensuring you're the only HEADRUSH provider in your market.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black uppercase mb-4">
+                    <span class="gradient-text">The Proof</span>
+                    <span class="text-white">Is Here.</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Don't take our word for it—hear from our franchise owners and retail partners.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-3xl hover-tilt">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">JD</div>
+                        <div>
+                            <h4 class="font-bold">Jamie D.</h4>
+                            <p class="text-gray-400 text-sm">Franchise Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "This vending machine made my life easier—and my profits bigger. I'm making passive income while focusing on my main business."
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-3xl hover-tilt">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">AS</div>
+                        <div>
+                            <h4 class="font-bold">Alex S.</h4>
+                            <p class="text-gray-400 text-sm">Convenience Store Owner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "The HEADRUSH machine in my store has increased foot traffic by 15%. Customers love the convenience and modern design."
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 p-8 rounded-3xl hover-tilt">
+                    <div class="flex items-center mb-6">
+                        <div class="gradient-bg w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">MR</div>
+                        <div>
+                            <h4 class="font-bold">Maria R.</h4>
+                            <p class="text-gray-400 text-sm">White Label Partner</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 italic">
+                        "The white label option let us maintain our brand identity while adding a new revenue stream. Setup was seamless."
+                    </p>
+                    <div class="mt-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-black uppercase mb-4">
+                    <span class="text-gray-900">Get Answers,</span>
+                    <span class="gradient-text">Fast.</span>
+                </h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    Common questions about machine operation, franchise details, and branding customization.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-bold uppercase text-lg">
+                        <span>How much does a HEADRUSH machine cost?</span>
+                        <i class="fas fa-plus text-pink-600"></i>
+                    </button>
+                    <div class="mt-2 text-gray-700 hidden">
+                        Our standard machines start at $4,999, with financing options available. Franchise packages begin at $24,999 for a complete turnkey business solution.
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-bold uppercase text-lg">
+                        <span>What's included in the franchise package?</span>
+                        <i class="fas fa-plus text-pink-600"></i>
+                    </button>
+                    <div class="mt-2 text-gray-700 hidden">
+                        Franchise packages include 3-5 machines (depending on package), placement assistance, comprehensive training, marketing materials, and ongoing support.
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-bold uppercase text-lg">
+                        <span>How often do machines need restocking?</span>
+                        <i class="fas fa-plus text-pink-600"></i>
+                    </button>
+                    <div class="mt-2 text-gray-700 hidden">
+                        Restocking frequency depends on location and sales volume. Our app provides real-time inventory tracking and alerts when stock is low.
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-bold uppercase text-lg">
+                        <span>Can I customize the machine's appearance?</span>
+                        <i class="fas fa-plus text-pink-600"></i>
+                    </button>
+                    <div class="mt-2 text-gray-700 hidden">
+                        Absolutely! Our white label program offers complete customization of colors, branding, and messaging to match your existing identity.
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-200 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-bold uppercase text-lg">
+                        <span>What kind of support do you provide?</span>
+                        <i class="fas fa-plus text-pink-600"></i>
+                    </button>
+                    <div class="mt-2 text-gray-700 hidden">
+                        We offer 24/7 technical support, regular maintenance checks, marketing assistance, and business optimization consultations.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 gradient-bg text-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-black uppercase mb-6">
+                <span class="text-white">Ready to</span>
+                <span class="text-black">Join the Revolution?</span>
+            </h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">
+                Whether you're interested in a single machine or a full franchise opportunity, we'll help you get started.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-black text-white px-8 py-4 rounded-full font-bold uppercase hover-tilt pulse-animation">
+                    Get Started Today
+                </button>
+                <button class="bg-white text-black px-8 py-4 rounded-full font-bold uppercase hover-tilt">
+                    Schedule a Call
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12">
+                <div>
+                    <h3 class="text-3xl font-black gradient-text mb-6">HEADRUSH</h3>
+                    <p class="text-gray-400">
+                        Disrupting retail with automated vending solutions that deliver maximum profits with minimal effort.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold uppercase mb-4 gradient-text">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-white transition">Products</a></li>
+                        <li><a href="#franchise" class="text-gray-400 hover:text-white transition">Franchise</a></li>
+                        <li><a href="#whitelabel" class="text-gray-400 hover:text-white transition">White Label</a></li>
+                        <li><a href="#app" class="text-gray-400 hover:text-white transition">App</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold uppercase mb-4 gradient-text">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold uppercase mb-4 gradient-text">Connect</h4>
+                    <div class="flex space-x-4 mb-6">
+                        <a href="#" class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover-tilt">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover-tilt">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover-tilt">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center hover-tilt">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400">
+                        Subscribe to our newsletter for updates and promotions.
+                    </p>
+                    <div class="mt-4 flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none w-full">
+                        <button class="gradient-bg text-white px-4 rounded-r-lg hover-tilt">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500">
+                <p> 2023 HEADRUSH. All rights reserved. A disruptive vending revolution.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ toggle functionality
+        document.querySelectorAll('.faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                if (answer.classList.contains('hidden')) {
+                    answer.classList.remove('hidden');
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    answer.classList.add('hidden');
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+        
+        // Simple animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('slide-in');
+                }
+            });
+        }, {threshold: 0.1});
+        
+        document.querySelectorAll('.slide-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</html>
